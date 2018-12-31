@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html class>
+<head>
+<title>Totally legit Game</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--Make hyperlink-->
+<link rel="stylesheet" type="text/css" href="cs.css">
+
+<h1> College Simulator </h1>
+</head>
+<br> </br>
+<body>
+<!-- Make a hyper link -->
+<div class="clearfix">
+<div class="sidebar">
+<p>This is a Sidebar</p>
+<script>
+<!-- these are global variables do not reuse-->
+var stats = [ 6, 6, 6, 6, 6, 6, 6, 6];
+var pre = 50;
+<!-- Jock, Popular Kid, Nerd, Straight A Student, Foolish Genius, Idiot Savant, School Bully, Victim, Loner, Silver Spoon
+var allocate = 8;
+var stat_name = [ STR, PER, CHA, INT, WIS, END, WILL, LUK];
+</script>
+</div>
+
+<div class ="num">
+<p id="croom">000</p><p id="proom">000</p>
+</div>
+<!--Rip values with innerHTML-->
+
+<!--Intro screen 1-->
+<div class ="content">
+<div class ="filler">
+<p id="intro"> Tell me about yourself...</p>
+Name: <input id="ninput" type="text" name="char_name" value = ""><br>
+Gender: <input id="ginput" type="text" name="gender" value = ""><br>
+<button onclick= 'getPlayer();changeRoom()'> Done </button>
+</div>
+
+<script>
+var player = {name:"John", class:"", gender:"", health:100, stat:[6,6,6,6,6,6,6,6], pre:50};
+var allocate =7;
+
+function getPlayer(){
+    player["name"] = document.getElementById("ninput").value;
+    player["gender"] = document.getElementById("ginput").value;
+}
+
+function setClass(){
+    var classnum = document.getElementsByName("radiobutton-class");
+    var cls;
+    for(var i=0; i<10;i++){
+    	if(classnum[i].checked){
+        	cls=i;
+            break;
+        }
+
+    }
+	switch (cls) {
+        case 0:
+    	    player.class = "Jock";
+                player.stat=[7,6,6,5,5,7,6,6]
+	    player.pre=50
+            break;
+        case 1:
+    	    player.class = "Popular";
+                player.stat=[6,5,7,6,5,6,6,6]
+	    player.pre=60
+            break;
+        case 2:
+    	    player.class= "Nerd";
+                player.stat=[5,7,6,7,6,5,6,6]
+	    player.pre=50
+            break;
+        case 3:
+    	    player.class= "Straight A Student";
+                player.stat=[5,6,6,8,8,5,4,6]
+	    player.pre=50
+            break;
+        case 4:
+    	    player.class= "Foolish Genius";
+                player.stat=[5,6,6,9,4,6,6,6]
+	    player.pre=50
+            break;
+        case 5:
+    	    player.class= "Idiot Savant";
+                player.stat=[6,6,6,5,4,6,6,4]
+	    player.pre=50
+            break;
+        case 6:
+    	    player.class= "School Bully";
+                player.stat=[7,6,6,5,5,6,6,6]
+	    player.pre=60
+            break;
+        case 7:
+    	    player.class= "Victim";
+                player.stat=[6,7,6,6,7,7,5,5]
+    	player.pre=40
+            break;
+        case 8:
+    	   player.class = "Loner";
+               player.stat=[4,4,4,4,4,4,4,4]
+	   player.pre=30
+	   allocate = 15;
+            break;
+        case 9:
+    	    player.class = "Silver Spoon";
+                player.stat=[7,7,7,7,7,7,7,7]
+	    player.pre=80
+            break;
+     }
+
+    
+}
+
+function changeRoom(){
+    var x = document.getElementById("croom").innerHTML;
+    if(x == "000"){
+        document.getElementById("change").innerHTML = "<p>Which do you most closely relate to?</p><input id= '0' name='radiobutton-class' type= 'radio'><label for='class-0'> Jock: Suh Dude.</label><br><input id='1' name= 'radiobutton-class' type= 'radio'><label for= 'class-1'> Popular Kid: Center of the fkn Universe. Wubalubadubdub.</label><br><input id= '2' name= 'radiobutton-class' type= 'radio'><label for= 'class-2'> Nerd: Outside is such a shitty server.</label><br><input id= '3' name= 'radiobutton-class' type= 'radio'><label for= 'class-3'> Straight A Student: 4.0 is love, 4.0 is life. </label><br><input id= '4' name= 'radiobutton-class' type= 'radio'><label for= 'class-4'> Foolish Genius: That frat party before the finals was totally worth it. </label><br><input id= '5' name='radiobutton-class' type= 'radio'><label for= 'class-5'> Idiot Savant: CouldnÅft get a C, got an A instead </label><br><input id= '6' name= 'radiobutton-class' type= 'radio'><label for='class-6'> School Bully: WhatÅfs mine is mine, and what's yours is also mine.</label><br><input id= '7' name='radiobutton-class' type= 'radio'><label for= 'class-7'> Victim: The unfortunate soul that was the target of bullies while growing up.</label><Br><input id= '8' name= 'radiobutton-class' type= 'radio'><label for= 'class-8'> Loner: I donÅft know you. You donÅft know me. </label><br><input id= '9' name= 'radiobutton-class' type= 'radio'><label for='class-9'> Silver Spoon: Poverty? YouÅfre going to have to explain that to me.</label><br><button onclick= 'setClass();changeRoom()'> Done </button>";
+    document.getElementById("proom").innerHTML=document.getElementById("croom").innerHTML;
+	document.getElementById("croom").innerHTML="001";
+
+	}
+    else if(x==001){
+		document.getElementById("change").innerHTML="<p id= 'statpt'>You have 20 points left</p><p id= 'str' value=0></p><button onclick='changeStat(0);disStat()'>+</button><br><p id='per' value =1></p><button onclick='changeStat(1);disStat()'>+</button><p id='cha' value=2></p><br><button onclick = 'changeStat(2); disStat()'> +</button><p id= 'int' value=3></p><br><button onclick = 'changeStat(3); disStat()' > +</button><p id= 'wis' value=4></p><button onclick = 'changeStat(4);disStat()'>+</button><p id= 'end' value=5></p><button onclick = 'changeStat(5);disStat()'>+</button><p id= 'will' value=6></p><br><button onclick = 'changeStat(6);disStat()'>+</button><p id= 'luck' value =7></p><button onclick ='changeStat(7);disStat()'> +</button><p id= 'pre' value=8></p>";
+    	disStat();
+   	 	document.getElementById("proom").innerHTML=document.getElementById("croom").innerHTML;
+		document.getElementById("croom").innerHTML="002";
+    }
+    else if(x==002){
+    	document.getElementById("change").innerHTML="<h1>  Welcome to the world of adults. Here youÅfll begin your new life as a (wo)manbaby. Life can be unpredictable thus college may be certain hell, or unmistakable heaven. Although that really depends on you. </h1><br><button onclick='changeRoom()'>Continue</button>";
+        document.getElementById("proom").innerHTML=document.getElementById("croom").innerHTML;
+		document.getElementById("croom").innerHTML="003";
+    }
+    else if(x==003){
+    
+    }
+
+}
+
+function changeStat(stat){
+	switch(stat){
+		case 0:
+			player.stat[0]=player.stat[0]+1;
+			break;
+		case 1:
+			player.stat[1]=player.stat[1]+1;
+			break;
+		case 2:
+			player.stat[2]=player.stat[2]+1;
+			break;
+		case 3:
+			player.stat[3]=player.stat[3]+1;
+			break;
+		case 4:
+			player.stat[4]=player.stat[4]+1;
+			break;
+		case 5:
+			player.stat[5]=player.stat[5]+1;
+			break;
+		case 6:
+			player.stat[6]=player.stat[6]+1;
+			break;
+		case 7:
+			player.stat[7]=player.stat[7]+1;
+			break;
+	}
+		allocate=allocate-1;
+        if(allocate==0){
+        	changeRoom();
+            }
+	
+}
+function disStat(){
+    document.getElementById('statpt').innerHTML='You have '+ allocate+  ' points to distribute';
+    document.getElementById('str').innerHTML= 'Strength: '+player.stat[0];
+    document.getElementById('per').innerHTML='Perception: '+player.stat[1];
+    document.getElementById('cha').innerHTML='Charisma: '+player.stat[2];
+    document.getElementById('int').innerHTML='Intelligence: '+player.stat[3];
+    document.getElementById('wis').innerHTML= 'Wisdom: '+player.stat[4];
+    document.getElementById('end').innerHTML= 'Endurance: '+player.stat[5];
+    document.getElementById('will').innerHTML= 'Will: '+player.stat[6];
+    document.getElementById('luck').innerHTML = 'Luck: '+player.stat[7];
+    document.getElementById('pre').innerHTML = 'Prestige: '+player.pre;
+}
+</script>
+</html>
